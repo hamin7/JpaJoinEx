@@ -1,11 +1,14 @@
 package com.example.jpajoin.service;
 
+import com.example.jpajoin.dto.TeamDto;
 import com.example.jpajoin.entity.Team;
 import com.example.jpajoin.repository.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,4 +27,12 @@ public class TeamService {
         }
     }
 
+    public List<TeamDto> teamList() throws Exception {
+        List<Team> list = teamRepository.findAll();
+        List<TeamDto> teamList = new ArrayList<>();
+        for (Team t : list) {
+            teamList.add(new TeamDto(t.getId(), t.getName()));
+        }
+        return teamList;
+    }
 }
