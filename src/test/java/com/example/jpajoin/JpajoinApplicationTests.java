@@ -21,8 +21,14 @@ class JpajoinApplicationTests {
     private TeamRepository teamRepository;
     @Test
     void insertTeam() {
-        Team team = new Team(2, "LG");
+        Team team = Team.builder().id(3).name("SK").build();
         teamRepository.save(team);
+    }
+
+    @Test
+    void selectMember() {
+        Member member = memberRepository.findById(10).get();
+        System.out.println(member);
     }
 
     @Test
@@ -30,11 +36,5 @@ class JpajoinApplicationTests {
         Team team = teamRepository.findByName("KT");
         Member member = new Member(11, "GoYoungPyo", team);
         memberRepository.save(member);
-    }
-
-    @Test
-    void selectMember() {
-        Member member = memberRepository.findById(10).get();
-        System.out.println(member);
     }
 }
