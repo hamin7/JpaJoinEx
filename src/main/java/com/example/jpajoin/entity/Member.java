@@ -1,11 +1,10 @@
 package com.example.jpajoin.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -17,4 +16,14 @@ public class Member {
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
+
+    @Builder
+    public Member(Integer id, String name) {
+        this.id=id;
+        this.name=name;
+    }
+    @Override
+    public String toString() {
+        return "Member["+id+":"+name+":"+team.getName()+"]";
+    }
 }

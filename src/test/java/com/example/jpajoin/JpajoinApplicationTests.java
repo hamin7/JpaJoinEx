@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class JpajoinApplicationTests {
@@ -19,6 +21,7 @@ class JpajoinApplicationTests {
 
     @Autowired
     private TeamRepository teamRepository;
+
     @Test
     void insertTeam() {
         Team team = Team.builder().id(3).name("SK").build();
@@ -34,7 +37,16 @@ class JpajoinApplicationTests {
     @Test
     void insertMember() {
         Team team = teamRepository.findByName("KT");
-        Member member = new Member(11, "GoYoungPyo", team);
+        Member member = new Member(1, "GoYoungPyo", team);
         memberRepository.save(member);
+    }
+
+    @Test
+    void selectTeam() {
+        Team team = teamRepository.findByName("KT");
+        List<Member> list = team.getMembers();
+        for(Member m: list) {
+            System.out.println(m.toString());
+        }
     }
 }
