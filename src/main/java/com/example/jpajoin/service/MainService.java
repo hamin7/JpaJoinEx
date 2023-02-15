@@ -10,6 +10,7 @@ import com.example.jpajoin.entity.Member;
 import com.example.jpajoin.entity.Team;
 import com.example.jpajoin.repository.MemberRepository;
 import com.example.jpajoin.repository.TeamRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,8 @@ public class MainService {
     private TeamRepository teamRepository;
     @Autowired
     private MemberRepository memberRepository;
+
+    ModelMapper modelMapper = new ModelMapper();
 
     public void regTeam(Team team) throws Exception {
         teamRepository.save(team);
